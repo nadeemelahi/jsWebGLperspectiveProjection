@@ -1,0 +1,35 @@
+
+a line from (10, 15) to (20,15),  if 
+
+Z is 1
+
+10 / 1 = 10
+20 / 1 = 20
+abs(10-20) = 10
+
+Z is 2 it would be
+
+10 / 2 = 5
+20 / 2 = 10
+abs(5 - 10) = 5
+
+Z = 3 it would be
+
+10 / 3 = 3.333
+20 / 3 = 6.666
+abs(3.333 - 6.666) = 3.333
+
+webgl divides by w, so we can use it
+
+first without using w
+
+zDivide = z*perspectiveFactor + 1.0;
+// Adding +1.0 maps (-1 -> 1) to (0 -> 2)
+// if perspectiveFactor = 0 then it is ORTHOGRAPHIC
+// try increasing perspective from 0->2
+
+gl_Position = vec4( x/zDivide , y/zDivide , z , w );
+// or since webgl divides by z
+gl_Position = vec4 ( x , y , z , zDivide );
+
+It turns out WebGL takes the x,y,z,w value we assign to gl_Position in our vertex shader and divides it by w automatically.
